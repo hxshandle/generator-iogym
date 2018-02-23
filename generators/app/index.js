@@ -14,9 +14,15 @@ module.exports = class extends Generator {
 
     const prompts = [
       {
+        type: 'input',
+        name: 'name',
+        message: '页面名称:',
+        default: 'PageNew'
+      },
+      {
         type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
+        name: 'isProui',
+        message: '是否是Proui的页面?',
         default: true
       }
     ]
@@ -28,13 +34,24 @@ module.exports = class extends Generator {
   }
 
   writing() {
+    // 复制page
+    this.fs.copyTpl(
+      this.templatePath('proui/websysPage/page.js'),
+      this.destinationPath(`${this.props.name}/${this.props.name}.js`),
+      this.props
+    )
+    this.fs.copyTpl(
+      this.templatePath('proui/websysPage/components/_page.vue'),
+      this.destinationPath(`${this.props.name}/components/_${this.props.name}.js`),
+      this.props
+    )
     this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+      this.templatePath('proui/websysPage/vuex'),
+      this.destinationPath(`${this.props.name}/vuex`)
     )
   }
 
   install() {
-    this.installDependencies()
+    // this.installDependencies()
   }
 }
