@@ -42,7 +42,7 @@ module.exports = class extends Generator {
     )
     this.fs.copyTpl(
       this.templatePath('proui/websysPage/components/_page.vue'),
-      this.destinationPath(`${this.props.name}/components/_${this.props.name}.js`),
+      this.destinationPath(`${this.props.name}/components/_${this.props.name}.vue`),
       this.props
     )
     this.fs.copy(
