@@ -1,6 +1,9 @@
 import resource from 'vueResourceConfig'
 export default {
-  doSomething () {
-    return resource('/404').get({})
+  get(url, payload) {
+    return resource(url).get(payload)
+  },
+  post(url, payload) {
+    return resource(url).save(payload)
   }
 }
